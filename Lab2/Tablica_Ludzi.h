@@ -1,5 +1,6 @@
 #pragma once
 #include "Pracownik.h"
+
 class Tablica_Ludzi
 {
 public:
@@ -12,9 +13,12 @@ public:
 	void edytuj(int rekord);
 	int szukaj(char imie[], char nazwisko[]);
 	void wypisz_wszystko();
+	friend ostream & operator << (ostream & wy, const Tablica_Ludzi & t);
+	friend istream & operator >> (istream & we, Tablica_Ludzi & t);
 private:
 	Pracownik *tablica;
 	long int dlugosc;
 	int aktualne_wypelnienie;
+	
 };
 

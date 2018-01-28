@@ -1,8 +1,7 @@
 #include "Data.h"
 #include "Pracownik.h"
 #include "Tablica_Ludzi.h"
-#include <iostream>
-using namespace std;
+
 
 
 void main()
@@ -104,7 +103,7 @@ void main()
 		
 	cin >> edytuj;*/
 
-	Data data, data2;
+	/*Data data, data2;
 	data.Wpisz();
 	data2.Wpisz();
 	Data data3(data);
@@ -118,9 +117,10 @@ void main()
 	if (data3 == data2) cout << "data= data2\n";
 	else cout << "data != data2\n";
 	if (data == data3) cout << "data = data3\n";
-	else cout << "data != data3\n";
+	else cout << "data != data3\n";*/
 
 	Pracownik pracownik, pracownik2;
+	
 	pracownik.Wpisz();
 	pracownik2.Wpisz();
 	Pracownik pracownik3(pracownik);

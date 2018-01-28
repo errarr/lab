@@ -1,8 +1,6 @@
+#pragma once
 #include "Pracownik.h"
-#include <string.h>
-#include <cstring>
-#include <iostream>
-using namespace std;
+
 
 
 Pracownik::Pracownik(const char * imie, const char * nazwisko, int d, int m, int r)
@@ -16,28 +14,33 @@ Pracownik::Pracownik(const char * imie, const char * nazwisko, int d, int m, int
 
 Pracownik::Pracownik(const Pracownik & wzorzec)
 {
-	cout << "Dziala konstruktor kopiujacy\n";
-	strcpy_s(m_pszImie, sizeof(wzorzec.m_pszImie), wzorzec.m_pszImie);
-	strcpy_s(m_pszNazwisko, sizeof(wzorzec.m_pszNazwisko), wzorzec.m_pszNazwisko);
+	
+	m_pszImie = new char[strlen(wzorzec.m_pszImie) + 1];
+	m_pszNazwisko = new char[strlen(wzorzec.m_pszNazwisko) + 1];
+	strcpy_s(m_pszImie, strlen(wzorzec.m_pszImie)+1, wzorzec.m_pszImie);
+	strcpy_s(m_pszNazwisko, strlen(wzorzec.m_pszNazwisko)+1, wzorzec.m_pszNazwisko);
 	m_DataUrodzenia = wzorzec.m_DataUrodzenia;
+	cout << "Dziala konstruktor kopiujacy\n";
 }
 
 Pracownik & Pracownik::operator=(const Pracownik & wzorzec)
 {
-	cout << "Dziala operator przypisania\n";
+	
 	if (this == &wzorzec) return *this;
-	m_pszImie = new char[strlen(wzorzec.m_pszImie) + 1]; 
+	m_pszImie = new char[strlen(wzorzec.m_pszImie) + 1];
 	m_pszNazwisko = new char[strlen(wzorzec.m_pszNazwisko) + 1];
-	strcpy_s(m_pszImie, sizeof(wzorzec.m_pszImie), wzorzec.m_pszImie);
-	strcpy_s(m_pszNazwisko, sizeof(wzorzec.m_pszNazwisko), wzorzec.m_pszNazwisko);
+	strcpy_s(m_pszImie, strlen(wzorzec.m_pszImie)+1, wzorzec.m_pszImie);
+	strcpy_s(m_pszNazwisko, strlen(wzorzec.m_pszNazwisko)+1, wzorzec.m_pszNazwisko);
 	m_DataUrodzenia = wzorzec.m_DataUrodzenia;
-
+	cout << "Dziala operator przypisania\n";
+	return *this;
 }
 
 bool Pracownik::operator==(const Pracownik & wzorzec)
 {
-	cout << "Dziala operator porownania\n";
+	cout << "Dziala operator przypisania\n";
 	return (strcmp(m_pszImie, wzorzec.m_pszImie) && strcmp(m_pszNazwisko, wzorzec.m_pszNazwisko) && m_DataUrodzenia == wzorzec.m_DataUrodzenia);
+	
 }
 
 
@@ -64,16 +67,17 @@ const char* Pracownik::Nazwisko() const
 void Pracownik::Imie(const char* nowe_imie)
 {
 	delete[] m_pszImie;
-	m_pszImie = new char[sizeof(nowe_imie)];
-	strcpy_s(m_pszImie, sizeof(nowe_imie), nowe_imie);
+	m_pszImie = new char[strlen(nowe_imie)+1];
+	strcpy_s(m_pszImie, strlen(nowe_imie)+1, nowe_imie);
+
 }
 
 
 void Pracownik::Nazwisko(const char* nowe_nazwisko)
 {
 	delete[] m_pszNazwisko;
-	m_pszNazwisko = new char[sizeof(nowe_nazwisko)];
-	strcpy_s(m_pszNazwisko, sizeof(nowe_nazwisko), nowe_nazwisko);
+	m_pszNazwisko = new char[strlen(nowe_nazwisko)+1];
+	strcpy_s(m_pszNazwisko, strlen(nowe_nazwisko)+1, nowe_nazwisko);
 }
 
 
@@ -129,4 +133,22 @@ bool Pracownik::SprawdzNazwisko(const char* por_nazwisko) const
 Data Pracownik::ZwrocDate() const
 {
 	return m_DataUrodzenia;
+}
+
+ostream & operator<<(ostream & wy, const Pracownik & o)
+{
+	wy << "Imie: " << o.m_pszImie << "Nazwisko: " << o.m_pszNazwisko << "Data urodzenia: " << o.m_DataUrodzenia << endl;
+	return wy;
+}
+
+
+istream & operator >> (istream & we, Pracownik & o)
+{	
+	cout << "Nazwisko\n";
+	we >> o.m_pszNazwisko;
+	cout << "Imie\n";
+	we >> o.m_pszImie;
+	cout << "Dzien urodzenia\n";
+	we >> o.m_DataUrodzenia;
+	return we;
 }

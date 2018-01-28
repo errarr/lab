@@ -1,9 +1,5 @@
+#pragma once
 #include "Data.h"
-#include <stdio.h>
-#include <iostream>
-
-using namespace std;
-
 
 
 
@@ -16,10 +12,11 @@ Data::Data()
 
 Data::Data(const Data & wzorzec)
 {
-	cout << "Dziala konstruktor kopiujacy\n";
+	
 	m_nDzien = wzorzec.m_nDzien;
 	m_nMiesiac = wzorzec.m_nMiesiac;
 	m_nRok = wzorzec.m_nRok;
+	cout << "Dziala konstruktor kopiujacy\n";
 }
 
 
@@ -29,11 +26,12 @@ Data::~Data()
 
 Data & Data::operator= (const Data & wzorzec)
 {
-	cout << "Dziala operator przypisania\n";
+	
 	if (this == &wzorzec) return *this;
 	m_nDzien = wzorzec.m_nDzien;
 	m_nMiesiac = wzorzec.m_nMiesiac;
 	m_nRok = wzorzec.m_nRok;
+	cout << "Dziala operator przypisania\n";
 	return *this;
 }
 
@@ -133,4 +131,20 @@ bool Data::Porownaj(Data &wzor) const
 		return true;
 	else
 		return false;
+}
+
+ostream & operator << (ostream &wy, const Data &d) 
+{
+	return wy << d.m_nDzien << "-" << d.m_nMiesiac << "-" << d.m_nRok << endl;
+}
+istream & operator >> (istream &we, Data &d) 
+{
+	cout << "Podaj dzien\n";
+	we >> d.m_nDzien;
+	cout << "Podaj miesiac\n";
+	we >> d.m_nMiesiac;
+	cout << "Podaj rok\n";
+	we >> d.m_nRok;
+	d.Koryguj();
+	return we;
 }
