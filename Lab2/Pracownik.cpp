@@ -5,8 +5,10 @@
 
 Pracownik::Pracownik(const char * imie, const char * nazwisko, int d, int m, int r)
 {
-	m_pszImie = new char[sizeof(imie)];
-	m_pszNazwisko = new char[sizeof(nazwisko)];
+	/*delete[] m_pszImie;
+	delete[] m_pszNazwisko;*/
+	m_pszImie = new char[strlen(imie)+1];
+	m_pszNazwisko = new char[strlen(nazwisko)+1];
 	Imie(imie);
 	Nazwisko(nazwisko);
 	DataUrodzenia(d, m, r);
@@ -14,31 +16,32 @@ Pracownik::Pracownik(const char * imie, const char * nazwisko, int d, int m, int
 
 Pracownik::Pracownik(const Pracownik & wzorzec)
 {
-	
+	delete[] m_pszImie;
+	delete[] m_pszNazwisko;
 	m_pszImie = new char[strlen(wzorzec.m_pszImie) + 1];
 	m_pszNazwisko = new char[strlen(wzorzec.m_pszNazwisko) + 1];
-	strcpy_s(m_pszImie, strlen(wzorzec.m_pszImie)+1, wzorzec.m_pszImie);
-	strcpy_s(m_pszNazwisko, strlen(wzorzec.m_pszNazwisko)+1, wzorzec.m_pszNazwisko);
+	strcpy(m_pszImie, wzorzec.m_pszImie);
+	strcpy(m_pszNazwisko, wzorzec.m_pszNazwisko);
 	m_DataUrodzenia = wzorzec.m_DataUrodzenia;
-	cout << "Dziala konstruktor kopiujacy\n";
+	//cout << "Dziala konstruktor kopiujacy\n";
 }
 
 Pracownik & Pracownik::operator=(const Pracownik & wzorzec)
 {
-	
-	if (this == &wzorzec) return *this;
-	m_pszImie = new char[strlen(wzorzec.m_pszImie) + 1];
-	m_pszNazwisko = new char[strlen(wzorzec.m_pszNazwisko) + 1];
-	strcpy_s(m_pszImie, strlen(wzorzec.m_pszImie)+1, wzorzec.m_pszImie);
-	strcpy_s(m_pszNazwisko, strlen(wzorzec.m_pszNazwisko)+1, wzorzec.m_pszNazwisko);
+	delete[] m_pszImie;
+	delete[] m_pszNazwisko;
+	m_pszImie = new char[strlen(wzorzec.m_pszImie)+1];
+	m_pszNazwisko = new char[strlen(wzorzec.m_pszNazwisko)+1];
+	strcpy(m_pszImie, wzorzec.m_pszImie);
+	strcpy(m_pszNazwisko, wzorzec.m_pszNazwisko);
 	m_DataUrodzenia = wzorzec.m_DataUrodzenia;
-	cout << "Dziala operator przypisania\n";
+	
 	return *this;
 }
 
 bool Pracownik::operator==(const Pracownik & wzorzec)
 {
-	cout << "Dziala operator przypisania\n";
+	//cout << "Dziala operator porownania\n";
 	return (strcmp(m_pszImie, wzorzec.m_pszImie) && strcmp(m_pszNazwisko, wzorzec.m_pszNazwisko) && m_DataUrodzenia == wzorzec.m_DataUrodzenia);
 	
 }
@@ -48,6 +51,7 @@ Pracownik::~Pracownik()
 {
 	delete[] m_pszImie;
 	delete[] m_pszNazwisko;
+	
 }
 
 
@@ -137,18 +141,18 @@ Data Pracownik::ZwrocDate() const
 
 ostream & operator<<(ostream & wy, const Pracownik & o)
 {
-	wy << "Imie: " << o.m_pszImie << "Nazwisko: " << o.m_pszNazwisko << "Data urodzenia: " << o.m_DataUrodzenia << endl;
+	wy <<  o.m_pszImie << " " << o.m_pszNazwisko << " " << o.m_DataUrodzenia << endl;
 	return wy;
 }
 
 
 istream & operator >> (istream & we, Pracownik & o)
 {	
-	cout << "Nazwisko\n";
-	we >> o.m_pszNazwisko;
-	cout << "Imie\n";
-	we >> o.m_pszImie;
-	cout << "Dzien urodzenia\n";
-	we >> o.m_DataUrodzenia;
+	//cout << "Nazwisko\n";
+	we >> o.m_pszImie >> o.m_pszNazwisko >> o.m_DataUrodzenia;
+	//cout << "Imie\n";
+	//we >> o.m_pszImie;
+	//cout << "Dzien urodzenia\n";
+	//we >> o.m_DataUrodzenia;
 	return we;
 }

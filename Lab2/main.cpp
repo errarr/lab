@@ -1,6 +1,7 @@
 #include "Data.h"
 #include "Pracownik.h"
 #include "Tablica_Ludzi.h"
+#include <fstream>
 
 
 
@@ -119,7 +120,7 @@ void main()
 	if (data == data3) cout << "data = data3\n";
 	else cout << "data != data3\n";*/
 
-	Pracownik pracownik, pracownik2;
+	/*Pracownik pracownik, pracownik2;
 	
 	pracownik.Wpisz();
 	pracownik2.Wpisz();
@@ -134,18 +135,42 @@ void main()
 	if (pracownik3 == pracownik2) cout << "pracownik= pracownik2\n";
 	else cout << "pracownik != pracownik2\n";
 	if (pracownik == pracownik3) cout << "data = pracownik3\n";
-	else cout << "pracownik != pracownik3\n";
+	else cout << "pracownik != pracownik3\n";*/
+	
+
+	//Tablica_Ludzi tablica_ludzi = Tablica_Ludzi(10), tablica_ludzi2 = Tablica_Ludzi(10);
+
+	//tablica_ludzi.wypelnij();
+	//tablica_ludzi2.wypelnij();
+	//Tablica_Ludzi tablica_ludzi3(tablica_ludzi);
+	//tablica_ludzi.wypisz_wszystko();
+	//tablica_ludzi2.wypisz_wszystko();
+	//tablica_ludzi3.wypisz_wszystko();
+	//tablica_ludzi3 = tablica_ludzi2;
+	//tablica_ludzi3.wypisz_wszystko();
 
 
-	Tablica_Ludzi tablica_ludzi = Tablica_Ludzi(10), tablica_ludzi2 = Tablica_Ludzi(10);
 
-	tablica_ludzi.wypelnij();
-	tablica_ludzi2.wypelnij();
-	Tablica_Ludzi tablica_ludzi3(tablica_ludzi);
-	tablica_ludzi.wypisz_wszystko();
-	tablica_ludzi2.wypisz_wszystko();
-	tablica_ludzi3.wypisz_wszystko();
-	tablica_ludzi3 = tablica_ludzi2;
-	tablica_ludzi3.wypisz_wszystko();
+	Tablica_Ludzi tbl(2), tbl2(2);
+	cout << "tbl pracownik 1\n";
+	tbl.wypelnij();
+	/*cout << "tbl pracownik 2\n";
+	tbl.wypelnij();*/
+	cout << "tbl2 pracownik 1\n";
+	tbl2.wypelnij();
+	/*cout << "tbl2 pracownik 2\n";
+	tbl2.wypelnij();*/
 
+	cout << "tbl:" << endl << tbl;
+	cout << "tbl2:" << endl << tbl2;
+	ofstream t("test.txt");
+	t << tbl;
+	t.close();
+	ifstream i("test.txt");
+	i >> tbl2;
+	i.close();
+	cout << "tbl:" << endl << tbl;
+	cout << "tbl2:" << endl << tbl2;
+
+	system("pause");
 }

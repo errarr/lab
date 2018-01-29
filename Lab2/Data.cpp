@@ -12,11 +12,10 @@ Data::Data()
 
 Data::Data(const Data & wzorzec)
 {
-	
 	m_nDzien = wzorzec.m_nDzien;
 	m_nMiesiac = wzorzec.m_nMiesiac;
 	m_nRok = wzorzec.m_nRok;
-	cout << "Dziala konstruktor kopiujacy\n";
+	//cout << "Dziala konstruktor kopiujacy\n";
 }
 
 
@@ -26,18 +25,16 @@ Data::~Data()
 
 Data & Data::operator= (const Data & wzorzec)
 {
-	
-	if (this == &wzorzec) return *this;
 	m_nDzien = wzorzec.m_nDzien;
 	m_nMiesiac = wzorzec.m_nMiesiac;
 	m_nRok = wzorzec.m_nRok;
-	cout << "Dziala operator przypisania\n";
+	//cout << "Dziala operator przypisania\n";
 	return *this;
 }
 
 bool Data::operator== (const Data & wzorzec)
 {
-	cout << "Dziala operator porownania\n";
+	//cout << "Dziala operator porownania\n";
 	return (m_nDzien == wzorzec.m_nDzien && m_nMiesiac == wzorzec.m_nMiesiac && m_nRok == wzorzec.m_nRok);
 }
 
@@ -135,16 +132,16 @@ bool Data::Porownaj(Data &wzor) const
 
 ostream & operator << (ostream &wy, const Data &d) 
 {
-	return wy << d.m_nDzien << "-" << d.m_nMiesiac << "-" << d.m_nRok << endl;
+	return wy << d.m_nDzien << " " << d.m_nMiesiac << " " << d.m_nRok; 
 }
 istream & operator >> (istream &we, Data &d) 
 {
-	cout << "Podaj dzien\n";
-	we >> d.m_nDzien;
-	cout << "Podaj miesiac\n";
-	we >> d.m_nMiesiac;
-	cout << "Podaj rok\n";
-	we >> d.m_nRok;
+	//cout << "Podaj dzien\n";
+	we >> d.m_nDzien >> d.m_nMiesiac >> d.m_nRok;
+	//cout << "Podaj miesiac\n";
+	//we >> d.m_nMiesiac;
+	//cout << "Podaj rok\n";
+	//we >> d.m_nRok;
 	d.Koryguj();
 	return we;
 }
